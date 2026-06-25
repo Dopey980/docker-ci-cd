@@ -64,3 +64,12 @@ jobs:
         run: docker build -t dopey980/frontend-html:latest .
       - name: Publicar imagen en Docker Hub frontend
         run: docker push dopey980/frontend-html:latest
+  deploy-frontend:
+    needs: build-frontend
+    runs-on: self-hosted
+    steps:
+      - name: Actualizar contenedor frontend 
+        run: |
+          cd C:\Users\Joseph\Uniempresarial\Docker-CD-CI 
+          docker compose pull frontend
+          docker compose up -d frontend
